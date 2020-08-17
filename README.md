@@ -1,7 +1,8 @@
 <h1 align="center">Pokédex</h1>
 
 <p align="left">
-  Pokédex feita usando html,css e JavaScript puro
+  Pokédex feita usando html,css e JavaScript puro<br>
+  Usando a api: https://pokeapi.co/
 </p>
 
 <p align="left">
