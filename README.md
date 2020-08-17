@@ -6,7 +6,7 @@
 
 <p align="left">
     <ul>
-        <li><a href="https://jquery.com/">🔗 Jquery</a></li>
+        <li><a href="https://developer.mozilla.org/pt-BR/docs/Aprender/JavaScript">🔗 JavaScript</a></li>
         <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML">🔗 Html</a></li>
         <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">🔗 Css</a></li>
     </ul>
@@ -16,4 +16,4 @@
     Clonar projeto: git clone https://github.com/PedroHenrique-git/crud-php.git
 </p>
  
- ![VISUAL](/images/captura.PNG)
+ ![VISUAL](captura.PNG)
