@@ -3,22 +3,47 @@
     let qtd = 3;
     let more = 0;
 
+    let name = document.querySelector('.inputName');
+
+    name.value = '';
+
+    let container = document.querySelector('.conteudo-principal');
+    const btnSearch = document.querySelector('.pesquisa');
+
     function updateQtdLoadPokemons(){
         return more += 3;        
+    }   
+    function loadSearchedPokemon(name){
+        const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
+        fetch(url,{method:'GET'})
+        .then(response => response.json())
+        .then(pokemon => {
+            renderCardPokemon(pokemon)
+        })
+        .catch(e =>{
+            alert('Erro ao encontrar pokemon, verifique o nome por favor');
+        });   
     }
-
     async function loadPokemons(){
         const url = `https://pokeapi.co/api/v2/pokemon?limit=${qtd}&offset=${more}`;
-        const response = await fetch(url,{method:'GET'});
-        const pokemons = await response.json();
-        pokemons.results.forEach(pokemon => {
-            loadDataPokemon(pokemon.url)        
-        });
+        try{
+            const response = await fetch(url,{method:'GET'});
+            const pokemons = await response.json();
+            pokemons.results.forEach(pokemon => {
+                loadDataPokemon(pokemon.url)        
+            });
+        }catch(e){
+            alert('Erro ao carregar pokemons')
+        }
     }
     async function loadDataPokemon(url){
-        const response = await fetch(url,{method:'GET'});
-        const pokemonData = await response.json();
-        renderCardPokemon(pokemonData);
+        try{
+            const response = await fetch(url,{method:'GET'});
+            const pokemonData = await response.json();
+            renderCardPokemon(pokemonData);
+        }catch(e){
+            alert('Erro ao listar pokemons')
+        }
     }
     function createTypes(types){
         let div = createDiv();
@@ -63,6 +88,11 @@
     btn.addEventListener('click',() =>{
         updateQtdLoadPokemons();
         loadPokemons();
+    });
+
+    btnSearch.addEventListener('click',() =>{
+        container.innerHTML = '';
+        loadSearchedPokemon(name.value.toLowerCase());   
     });
 
    loadPokemons();
