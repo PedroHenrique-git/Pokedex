@@ -14,7 +14,6 @@
 </p>
 
 <p align="left">
-    <b>obs: Ainda estou desenvolvendo a funcionalidade de busca e de mais informações sobre o pokemon.</b><br>
     Clonar projeto: git clone https://github.com/PedroHenrique-git/Pokedex.git
 </p>
  
