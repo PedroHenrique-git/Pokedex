@@ -1,7 +1,7 @@
 <h1>Pokédex</h1>
 
 <p>
-  Pokédex made using html, css and pure JavaScriptbr>
+  Pokédex made using html, css and pure JavaScriptbr
   Using the api: https://pokeapi.co/
 </p>
 
