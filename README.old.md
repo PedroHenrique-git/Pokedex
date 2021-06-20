@@ -1,3 +1,0 @@
-<h1>Pokédex</h1>
-
-in production...
