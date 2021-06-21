@@ -1,0 +1,9 @@
+export const azulMarinho = '#040308';
+export const laranja = '#e62c07';
+export const laranjaClaro = '#eb4405';
+export const marrom = '#58302e';
+export const marromAlaranjado = '#b92f13';
+export const branco = '#f0eeec';
+export const bege = '#d0b4a3';
+export const laranjaClaro2 = '#ed9565';
+export const cinzaClaro = '#cecece';
