@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Header from '../../components/Header/Header';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import { MainContainer } from './style';
 import api from '../../services/api';
+import Loading from '../../components/Loading/Loading';
 
 interface IData {
   next: string;
@@ -38,7 +41,7 @@ export default function Index(): JSX.Element {
       setPages(data);
       setIsLoading(true);
     } catch (e) {
-      console.log(e.message);
+      toast.error(e.message);
     }
   };
 
@@ -46,18 +49,26 @@ export default function Index(): JSX.Element {
     getData('pokemon?limit=40&offset=60');
   }, []);
 
+  if (!isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Header msg="Pokedex made in React" />
       <MainContainer>
         <ul className="pokemon_container">
           {pokemons.map((pokemon) => (
-            <PokemonCard url={pokemon.url} />
+            <Link to={`/pokemon/${pokemon.name}`}>
+              <PokemonCard url={pokemon.url} />
+            </Link>
           ))}
         </ul>
-        <button onClick={() => getData(pages.next)} type="button">
-          Load more
-        </button>
+        <div className="load_more_container">
+          <button onClick={() => getData(pages.next)} type="button">
+            Load more
+          </button>
+        </div>
       </MainContainer>
     </>
   );

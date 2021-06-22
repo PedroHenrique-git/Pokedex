@@ -7,3 +7,4 @@ export const branco = '#f0eeec';
 export const bege = '#d0b4a3';
 export const laranjaClaro2 = '#ed9565';
 export const cinzaClaro = '#cecece';
+export const cinzaEscuro = '#202126';

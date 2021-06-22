@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import api from '../../services/api';
 import { CardPokemon } from './style';
+import Loading from '../../images/loading.gif';
 
 interface IPokemonCard {
   url: string;
@@ -38,7 +40,7 @@ export default function PokemonCard({ url }: IPokemonCard): JSX.Element {
       setPokemonData(data);
       setIsLoading(true);
     } catch (e) {
-      console.log(e.message);
+      toast.error(e.message);
     }
   };
 
@@ -46,13 +48,15 @@ export default function PokemonCard({ url }: IPokemonCard): JSX.Element {
     getData();
   }, []);
 
-  console.log(pokemonData);
-
   return (
     <CardPokemon>
       <h1>{pokemonData.name}</h1>
       <img
-        src={pokemonData.sprites.other['official-artwork'].front_default}
+        src={
+          isLoading
+            ? pokemonData.sprites.other['official-artwork'].front_default
+            : Loading
+        }
         alt={pokemonData.name}
       />
     </CardPokemon>

@@ -12,6 +12,14 @@ export const HeaderContainer = styled.header`
   justify-content: center;
   align-items: center;
 
+  a {
+    color: ${colors.branco};
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   img {
     height: 110px;
     width: 110px;
