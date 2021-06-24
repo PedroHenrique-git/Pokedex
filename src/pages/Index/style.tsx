@@ -16,29 +16,40 @@ export const MainContainer = styled.main`
   }
 
   .load_more_container {
-    margin: 50px 0;
+    margin: 50px auto;
+    max-width: 900px;
+
+    @media (max-width: 640px) {
+      max-width: 340px;
+    }
 
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 
     button {
       background: ${colors.azulMarinho};
-      border-radius: 20px;
+      border-radius: 50%;
       border: none;
       color: ${colors.branco};
       cursor: pointer;
       outline: none;
-      height: 50px;
+      height: 35px;
       padding: 10px;
-      width: 300px;
-      font-size: 24px;
+      width: 35px;
+      font-size: 16px;
+      margin-right: 10px;
       font-weight: bold;
       text-transform: uppercase;
 
       display: flex;
       align-items: center;
       justify-content: center;
+
+      @media (max-width: 640px) {
+        margin-top: 10px;
+      }
     }
   }
 `;

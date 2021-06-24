@@ -3,11 +3,11 @@ import * as colors from '../../styles/colors';
 
 export const CardPokemon = styled.li`
   border: 2px solid ${colors.azulMarinho};
-  border-radius: 50%;
+  //border-radius: 50%;
   background: ${colors.branco};
   cursor: pointer;
-  width: 190px;
-  height: 190px;
+  width: 250px;
+  height: 250px;
   list-style: none;
   margin: 15px 0 0 15px;
   display: flex;
@@ -15,14 +15,19 @@ export const CardPokemon = styled.li`
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 640px) {
+    margin-left: 0;
+  }
+
   h1 {
     font-size: 20px;
     color: ${colors.azulMarinho};
+    word-break: break-all;
   }
 
   img {
-    height: 120px;
-    width: 120px;
+    height: 180px;
+    width: 180px;
   }
 
   &:hover {

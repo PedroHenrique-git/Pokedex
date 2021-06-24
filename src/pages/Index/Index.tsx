@@ -18,18 +18,22 @@ interface IResult {
   url: string;
 }
 
-interface IInfo {
-  next: string;
-  previous: string;
-}
+const urls: string[] = [];
+const pagination = (totalItems: number, limit: number): void => {
+  const totalPages: number = Math.ceil(totalItems / limit);
+  let offset = 0;
+
+  for (let i = 1; i <= totalPages; i += 1) {
+    urls.push(`pokemon?limit=${limit}&offset=${offset}`);
+    offset += limit;
+  }
+};
+
+pagination(1118, 84);
 
 export default function Index(): JSX.Element {
   const [pokemons, setPokemons] = useState<IResult[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [pages, setPages] = useState<IInfo>({
-    next: '',
-    previous: '',
-  });
 
   const getData = async (url: string) => {
     try {
@@ -37,16 +41,22 @@ export default function Index(): JSX.Element {
       const response = await api.get<IData>(url);
       const { data } = response;
       const arrayPokemons: IResult[] = data.results;
-      setPokemons((oldArray) => [...oldArray, ...arrayPokemons]);
-      setPages(data);
+      setPokemons(arrayPokemons);
       setIsLoading(true);
     } catch (e) {
       toast.error(e.message);
     }
   };
 
+  const pagesBtn = () =>
+    urls.map((url, index) => (
+      <button onClick={() => getData(url)} type="button">
+        {index + 1}
+      </button>
+    ));
+
   useEffect(() => {
-    getData('pokemon?limit=40&offset=60');
+    getData('pokemon?limit=84&offset=0');
   }, []);
 
   if (!isLoading) {
@@ -64,11 +74,7 @@ export default function Index(): JSX.Element {
             </Link>
           ))}
         </ul>
-        <div className="load_more_container">
-          <button onClick={() => getData(pages.next)} type="button">
-            Load more
-          </button>
-        </div>
+        <div className="load_more_container">{pagesBtn()}</div>
       </MainContainer>
     </>
   );
