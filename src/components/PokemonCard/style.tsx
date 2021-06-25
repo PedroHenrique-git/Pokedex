@@ -3,7 +3,7 @@ import * as colors from '../../styles/colors';
 
 export const CardPokemon = styled.li`
   border: 2px solid ${colors.azulMarinho};
-  //border-radius: 50%;
+  border-radius: 5px;
   background: ${colors.branco};
   cursor: pointer;
   width: 250px;

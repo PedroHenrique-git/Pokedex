@@ -87,6 +87,7 @@ export default function PokemonPage(): JSX.Element {
       setIsLoading(true);
     } catch (e) {
       toast.error(e.message);
+      setIsLoading(true);
     }
   };
 
@@ -100,9 +101,13 @@ export default function PokemonPage(): JSX.Element {
 
   return (
     <>
-      <Header msg="Pokedex made in React" />
-      <MainContainer MainColor={ReturnColor(pokemon.types[0].type.name)}>
+      <Header msg="Pokedex made in React" form={undefined} hasForm={false} />
+      <MainContainer
+        MainColor={ReturnColor(pokemon.types[0].type.name)}
+        qtdForms={pokemon.forms.length}
+      >
         <div className="basic_informations">
+          <h1 className="pokemon_title_mobile">{pokemon.name}</h1>
           <div className="information">
             <h2>id</h2>
             <p>#{pokemon.id}</p>
@@ -142,6 +147,14 @@ export default function PokemonPage(): JSX.Element {
             src={pokemon.sprites.other['official-artwork'].front_default}
             alt={pokemon.name}
           />
+        </div>
+        <div className="pokemon_stats">
+          {pokemon.stats.map((stat) => (
+            <div className="stat">
+              <h2>{stat.stat.name}</h2>
+              <p>{stat.base_stat}</p>
+            </div>
+          ))}
         </div>
       </MainContainer>
     </>

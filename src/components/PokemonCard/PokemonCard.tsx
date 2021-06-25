@@ -41,6 +41,7 @@ export default function PokemonCard({ url }: IPokemonCard): JSX.Element {
       setIsLoading(true);
     } catch (e) {
       toast.error(e.message);
+      setIsLoading(true);
     }
   };
 

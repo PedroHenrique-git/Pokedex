@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from '../../components/Header/Header';
@@ -34,6 +34,7 @@ pagination(1118, 84);
 export default function Index(): JSX.Element {
   const [pokemons, setPokemons] = useState<IResult[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [value, setValue] = useState('');
 
   const getData = async (url: string) => {
     try {
@@ -48,12 +49,52 @@ export default function Index(): JSX.Element {
     }
   };
 
+  const getDataSearched = async () => {
+    try {
+      setIsLoading(false);
+      const response = await api.get<IData>(
+        `/pokemon/${value.toLowerCase().trim()}`
+      );
+
+      if (response.data) {
+        const arrayPokemons: IResult[] = [];
+        const pokemon: IResult = {
+          name: value,
+          url: `/pokemon/${value}`,
+        };
+        arrayPokemons.push(pokemon);
+        setPokemons(arrayPokemons);
+      }
+
+      setIsLoading(true);
+    } catch (e) {
+      toast.error(e.message);
+      setIsLoading(true);
+    }
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    getDataSearched();
+  };
+
   const pagesBtn = () =>
     urls.map((url, index) => (
       <button onClick={() => getData(url)} type="button">
         {index + 1}
       </button>
     ));
+
+  const form: JSX.Element = (
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <input
+        onChange={(e) => setValue(e.target.value)}
+        type="text"
+        placeholder="search a pokemon"
+      />
+      <button type="submit">search</button>
+    </form>
+  );
 
   useEffect(() => {
     getData('pokemon?limit=84&offset=0');
@@ -65,7 +106,7 @@ export default function Index(): JSX.Element {
 
   return (
     <>
-      <Header msg="Pokedex made in React" />
+      <Header msg="Pokedex made in React" form={form} hasForm />
       <MainContainer>
         <ul className="pokemon_container">
           {pokemons.map((pokemon) => (
