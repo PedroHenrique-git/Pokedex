@@ -23,7 +23,7 @@ export const HeaderContainer = styled.header<hasForm>`
 
   @media (max-width: 850px) {
     flex-direction: ${(props: hasForm) => (props.form ? 'column' : 'row')};
-    height: ${(props: hasForm) => (props.form ? '170px' : '100px')};
+    height: ${(props: hasForm) => (props.form ? '190px' : '100px')};
   }
 
   form {
@@ -37,7 +37,7 @@ export const HeaderContainer = styled.header<hasForm>`
       width: 280px;
 
       @media (max-width: 640px) {
-        width: 250px;
+        width: 220px;
       }
     }
 
